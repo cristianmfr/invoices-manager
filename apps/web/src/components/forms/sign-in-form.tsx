@@ -47,12 +47,16 @@ export function SignInForm() {
 			<InputField
 				name='email'
 				label='Email'
+				placeholder='john.doe@example.com'
+				type='email'
 				register={register('email')}
 				error={errors.email?.message}
 			/>
 			<InputField
 				name='password'
 				label='Password'
+				type='password'
+				placeholder='********'
 				register={register('password')}
 				error={errors.password?.message}
 			/>
