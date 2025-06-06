@@ -84,6 +84,9 @@ importers:
       '@eslint/js':
         specifier: ^9.18.0
         version: 9.28.0
+      '@invoices-manager/prettier':
+        specifier: workspace:*
+        version: link:../../packages/prettier
       '@nestjs/cli':
         specifier: ^11.0.0
         version: 11.0.7(@swc/cli@0.6.0(@swc/core@1.11.31(@swc/helpers@0.5.15))(chokidar@4.0.3))(@swc/core@1.11.31(@swc/helpers@0.5.15))(@types/node@22.15.30)
