@@ -10,9 +10,37 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useInvoiceParams } from '@/hooks/use-invoice-params'
 import { Invoice } from '@/types/invoice'
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, Row } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { CheckIcon, EyeIcon, MoreVerticalIcon, SendIcon } from 'lucide-react'
+
+export const ActionsCell = ({ row }: { row: Row<Invoice> }) => {
+	const { setParams } = useInvoiceParams()
+
+	return (
+		<div className='flex items-center justify-end'>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant='ghost' size='sm'>
+						<MoreVerticalIcon className='size-4' />
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent>
+					<DropdownMenuItem
+						onClick={() => setParams({ invoiceId: row.original.id.toString() })}
+					>
+						<EyeIcon className='size-4' />
+						Visualizar
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<SendIcon className='size-4' />
+						Enviar
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</div>
+	)
+}
 
 export const columns: ColumnDef<Invoice>[] = [
 	{
@@ -47,34 +75,6 @@ export const columns: ColumnDef<Invoice>[] = [
 	},
 	{
 		id: 'actions',
-		cell: ({ row }) => {
-			const { setParams } = useInvoiceParams()
-
-			return (
-				<div className='flex items-center justify-end'>
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button variant='ghost' size='sm'>
-								<MoreVerticalIcon className='size-4' />
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent>
-							<DropdownMenuItem
-								onClick={() =>
-									setParams({ invoiceId: row.original.id.toString() })
-								}
-							>
-								<EyeIcon className='size-4' />
-								Visualizar
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<SendIcon className='size-4' />
-								Enviar
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				</div>
-			)
-		},
+		cell: ({ row }) => <ActionsCell row={row} />,
 	},
 ]
