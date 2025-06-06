@@ -48,7 +48,7 @@ import { InvoicesRow } from './row'
 import { InvoicesSkeleton } from './skeleton'
 
 export function InvoicesTable({ invoices }: { invoices: Invoice[] }) {
-	const [month, setMonth] = useState(new Date().getMonth() + 1)
+	const [month, setMonth] = useState(6)
 	const [year, setYear] = useState(new Date().getFullYear())
 
 	const [rowSelection, setRowSelection] = React.useState({})
